@@ -16,18 +16,19 @@
 name = str(input("Введите имя и фамилию: "))
 age = int(input('Введите свой возраст: '))
 mass = float(input('Введите свой вес: '))
-def patient_data():
-    print('Пациент: ' + name + ', ' + str(age) + ' лет,  вес ', str(mass), end=' ')
+print('Пациент: ' + name + ', ' + str(age) + ' лет,  вес ', str(mass), end=' ')
+#def patient_data():
+    #print('Пациент: ' + name + ', ' + str(age) + ' лет,  вес ', str(mass), end=' ')
     # print(f'Пациент: {name}, {age} лет, вес {int(mass)} кг')     - новый способ формата строки на будущее
 if 50<=mass<=120 :
      if  age<=30:
-         patient_data()
+         #patient_data()
          print(' - Вы в хорошем состоянии')
      elif age>=40:
-         patient_data()
+         #patient_data()
          print(' - Вам требуется врачебный осмотр')
 elif age>30 and (mass<50 or mass>120):
-     patient_data()
+     #patient_data()
      print(' - Вам требуется начать вести правильный образ жизни')
 
 else:
