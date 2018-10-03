@@ -13,11 +13,11 @@
 
 # Подсказка: воспользоваться методом .format()
 
-#fruits = ['apple', 'banana', 'kiwi', 'watermelon']
-#i=0
-#for fruit in fruits:
-#    i+=1
-#    print('{}. {}'.format(i,fruit.rjust(10,' ')))
+fruits = ['apple', 'banana', 'kiwi', 'watermelon']
+i=0
+for fruit in fruits:
+    i+=1
+    print('{}. {}'.format(i,fruit.rjust(10,' ')))
 
 # Задача-2:
 # Даны два произвольные списка.
@@ -27,3 +27,20 @@ spisok1=['a','g', 45, 'word','z']
 spisok2=['word','b', 45, 'a', 'cd']
 spisok1= set(spisok1)-set(spisok2)
 print('spisok1=',list(spisok1))
+
+# Задача-3:
+# Дан произвольный список из целых чисел.
+# Получите НОВЫЙ список из элементов исходного, выполнив следующие условия:
+# если элемент кратен двум, то разделить его на 4, если не кратен, то умножить на два.
+
+nums1 = [1, 22, 53, 6, 9, 30, 45]
+nums2 = []
+print('cписок1 = ',nums1)
+for num in nums1:
+    if num % 2 == 0:
+        num = num/4
+        nums2.append(num)
+    else:
+        num = num*2
+        nums2.append(num)
+print('список2 = ',nums2)
