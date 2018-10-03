@@ -13,9 +13,17 @@
 
 # Подсказка: воспользоваться методом .format()
 
-fruits = ['apple', 'banana', 'kiwi', 'watermelon']
-i=0
-for fruit in fruits:
-    i+=1
-    print('{}. {}'.format(i,fruit.rjust(10,' ')))
-    
+#fruits = ['apple', 'banana', 'kiwi', 'watermelon']
+#i=0
+#for fruit in fruits:
+#    i+=1
+#    print('{}. {}'.format(i,fruit.rjust(10,' ')))
+
+# Задача-2:
+# Даны два произвольные списка.
+# Удалите из первого списка элементы, присутствующие во втором списке.
+
+spisok1=['a','g', 45, 'word','z']
+spisok2=['word','b', 45, 'a', 'cd']
+spisok1= set(spisok1)-set(spisok2)
+print('spisok1=',list(spisok1))
