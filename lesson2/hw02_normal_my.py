@@ -6,14 +6,14 @@
 # если такой корень вообще можно извлечь
 # Пример: Дано: [2, -5, 8, 9, -25, 25, 4]   Результат: [3, 5, 2]
 
-from math import sqrt
-
-nums = [-5, 47, 9, 24, 36, -18, 16]
-sr_nums = []
-for num in nums:
-    if num>=0 and sqrt(num).is_integer():
-        sr_nums.append(int(sqrt(num)))
-print(sr_nums)
+# from math import sqrt
+#
+# nums = [-5, 47, 9, 24, 36, -18, 16]
+# sr_nums = []
+# for num in nums:
+#     if num>=0 and sqrt(num).is_integer():
+#         sr_nums.append(int(sqrt(num)))
+# print(sr_nums)
 
 # Задача-2: Дана дата в формате dd.mm.yyyy, например: 02.11.2013.
 # Ваша задача вывести дату в текстовом виде, например: второе ноября 2013 года.
@@ -32,11 +32,20 @@ months = {
     '01':'января','02':'февраля','03':'марта','04':'апреля','05':'мая','06':'июня','07':'июля',
     '08':'августа','09':'сентября','10':'октября','11':'ноября','12':'декабря'
     }
-data=str(input('Введите дату в формате dd.mm.yyyy\n')).split('.')
-txt_data=[]
-for i in data:
-    if data[0]:
-        txt_data.append(days[data[0]])
-    elif data[1]:
-        txt_data.append(days[data[1]])
-print(txt_data)
+output=[]
+tmp_data=str(input('Введите дату в формате dd.mm.yyyy\n'))
+#print(tmp_data[2:6:3]) - тест программы на наличие разделительных точек в строке даты
+if len(tmp_data)!= 10 or tmp_data[2:6:3]!='..':
+    print('Вы ввели дату в неправильном формате.')
+else:
+    data = tmp_data.split('.')
+    #print(data) - проверка работы метода split в программе
+    data[2]=int(data[2])
+    output.append(days[data[0]])
+    output.append(months[data[1]])
+    output.append(data[2])
+    if data[1]=='02'and (data[0]=='29' or data[0]=='30' or data[0]=='31'):
+        print('В феврале не может быть столько дней. Вы ввели некорректные данные.')
+    elif 
+    else:
+        print('{} {} {} года'.format(output[0],output[1],output[2]))
