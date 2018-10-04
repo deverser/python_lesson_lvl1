@@ -40,12 +40,13 @@ if len(tmp_data)!= 10 or tmp_data[2:6:3]!='..':
 else:
     data = tmp_data.split('.')
     #print(data) - проверка работы метода split в программе
-    data[2]=int(data[2])
-    output.append(days[data[0]])
-    output.append(months[data[1]])
-    output.append(data[2])
-    if data[1]=='02'and (data[0]=='29' or data[0]=='30' or data[0]=='31'):
+    #output.append(days[data[0]])
+    #output.append(months[data[1]])
+    #output.append(int(data[2]))
+    if data[1]=='02'and (data[0]=='29','30','31'):
         print('В феврале не может быть столько дней. Вы ввели некорректные данные.')
-    elif 
+    elif data[0]=='31' and (data[1]=='04','06','09','11'):
+        print('В этом месяце 30 дней, вы неправильно ввели день')
     else:
-        print('{} {} {} года'.format(output[0],output[1],output[2]))
+        print('{} {} {} года'.format(days[data[0]], months[data[1]], int(data[2])))
+        # print('{} {} {} года'.format(output[0],output[1],output[2]))
