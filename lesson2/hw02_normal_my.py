@@ -39,20 +39,18 @@ data = tmp_data.split('.')
 if len(tmp_data)!= 10 or tmp_data[2:6:3]!='..' or (data[0].isdigit()==False or data[1].isdigit()==False or data[2].isdigit()==False):
     print('Вы ввели дату в неправильном формате.')
 else:
-    #data = tmp_data.split('.')
-    #if data[0].isdigit() or data[1].isdigit() or data[2].isdigit()==False:
-        #print('Вы ввели дату в неправильном формате')
-    years=int(data[2])
-    #print(data) - проверка работы метода split в программе
-    #output.append(days[data[0]])
-    #output.append(months[data[1]])
-    #output.append(int(data[2]))
-    if data[1]=='02' and data[0]=='29' and years%4!=0:
-        print('Этот год не високосный, в феврале 28 дней')
-    elif data[1]=='02' and (data[0]=='30'or data[0]=='31'):
-        print('В феврале не может быть столько дней. Вы ввели некорректные данные.')
-    elif data[0]=='31' and (data[1]=='04'or data[1]=='06'or data[1]=='09'or data[1]=='11'):
-        print('В этом месяце 30 дней, вы неправильно ввели день')
+    if data[0] not in days:
+        print('Вы ввели неправильный день. Вводите от 01 до 31.')
+    elif data[1] not in months:
+        print('Вы ввели неправильный месяц. Вводите от 01 до 12.')
     else:
-        print('{} {} {} года'.format(days[data[0]], months[data[1]], years))
-        # print('{} {} {} года'.format(output[0],output[1],output[2]))
+        years=int(data[2])
+    #print(data) - проверка работы метода split в программе
+        if data[1]=='02' and data[0]=='29' and years%4!=0:
+            print('Этот год не високосный, в феврале 28 дней')
+        elif data[1]=='02' and (data[0]=='30'or data[0]=='31'):
+            print('В феврале не может быть столько дней. Вы ввели некорректные данные.')
+        elif data[0]=='31' and (data[1]=='04'or data[1]=='06'or data[1]=='09'or data[1]=='11'):
+            print('В этом месяце 30 дней, вы неправильно ввели день')
+        else:
+            print('{} {} {} года'.format(days[data[0]], months[data[1]], years))
