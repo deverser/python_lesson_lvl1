@@ -34,11 +34,14 @@ months = {
     }
 output=[]
 tmp_data=str(input('Введите дату в формате dd.mm.yyyy\n'))
+data = tmp_data.split('.')
 #print(tmp_data[2:6:3]) - тест программы на наличие разделительных точек в строке даты
-if len(tmp_data)!= 10 or tmp_data[2:6:3]!='..':
+if len(tmp_data)!= 10 or tmp_data[2:6:3]!='..' or (data[0].isdigit()==False or data[1].isdigit()==False or data[2].isdigit()==False):
     print('Вы ввели дату в неправильном формате.')
 else:
-    data = tmp_data.split('.')
+    #data = tmp_data.split('.')
+    #if data[0].isdigit() or data[1].isdigit() or data[2].isdigit()==False:
+        #print('Вы ввели дату в неправильном формате')
     years=int(data[2])
     #print(data) - проверка работы метода split в программе
     #output.append(days[data[0]])
@@ -48,10 +51,8 @@ else:
         print('Этот год не високосный, в феврале 28 дней')
     elif data[1]=='02' and (data[0]=='30'or data[0]=='31'):
         print('В феврале не может быть столько дней. Вы ввели некорректные данные.')
-    elif data[0]=='31' and (data[1]=='04'or'06'or'09'or'11'):
+    elif data[0]=='31' and (data[1]=='04'or data[1]=='06'or data[1]=='09'or data[1]=='11'):
         print('В этом месяце 30 дней, вы неправильно ввели день')
-    elif years<=0:
-        print('Вы ввели неправильный год')
     else:
         print('{} {} {} года'.format(days[data[0]], months[data[1]], years))
         # print('{} {} {} года'.format(output[0],output[1],output[2]))
