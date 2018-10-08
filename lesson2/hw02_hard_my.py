@@ -10,7 +10,7 @@ b=float(sp_eq[1])
 tmp_k = sp_eq[0].split(' ')
 k = int(tmp_k[2].replace('*x',' '))
 y = k*x + b
-print('y = '+str(y)+' при x = '+str(x))
+print('y = ',y,' при x = ',x)
 
 
 
