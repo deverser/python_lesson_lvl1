@@ -17,18 +17,27 @@
 
 # Задание - 2
 # Создайте функцию, принимающую на вход 3 числа, и возвращающую наибольшее из них
-def max_num(nums):
-    return max(nums)
-
-print('Bведите три числа.')
-nums = []
-while len(nums)<3:
-    num = int(input('Введите число: '))
-    nums.append(num)
-
-result = max_num(nums)
-print('Maximum number is ', result)
+# def max_num(nums):
+#     return max(nums)
+#
+# print('Bведите три числа.')
+# nums = []
+# while len(nums)<3:
+#     num = int(input('Введите число: '))
+#     nums.append(num)
+#
+# result = max_num(nums)
+# print('Maximum number is ', result)
 
 # Задание - 3
 # Создайте функцию, принимающую неограниченное количество строковых аргументов,
 # верните самую длинную строку из полученных аргументов
+
+def string_func(*args):
+    for arg in args:
+        if len(arg) == max(len(arg)):
+            return arg
+
+arguments = ['Привет', 'Как дела?', "Where's my money, bitch?"]
+max_string = string_func(*arguments)
+print('Строка с максимальным количеством символов: ' + max_string)
