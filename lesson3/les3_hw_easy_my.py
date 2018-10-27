@@ -34,10 +34,12 @@
 # верните самую длинную строку из полученных аргументов
 
 def string_func(*args):
+    i = ''
     for arg in args:
-        if len(arg) == max(len(arg)):
-            return arg
+        if len(i) < len(arg):
+            i = arg
+    return i
 
-arguments = ['Привет', 'Как дела?', "Where's my money, bitch?"]
+arguments = ['Привет',"Where's my money, bitch?", 'dsfdsgfdhgfjgjtjgfjgfjgfjfgjgfj', 'Как дела?']
 max_string = string_func(*arguments)
 print('Строка с максимальным количеством символов: ' + max_string)
