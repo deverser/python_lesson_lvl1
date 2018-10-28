@@ -14,27 +14,51 @@
 # используя возможности языка Python.
 
 
-people = ['андрей', 'саня', 'вася', 'чувак']
-money = [100000, 50000, 35000, 45000]
+people = ['андрей', 'саня', 'вася', 'чувак', 'чувиха', 'duuuude']
+money = [1000000, 45000, 35000, 75000, 600000, 13400]
 tax = 0.13
+
 
 def salary(people, money):
     '''Начисление зарплаты работникам без учёта вычета налогов'''
-    salary_dict = dict(zip(people, money))
+    salary_dict = dict(zip(people, money))              # создаем из 2х списков словарь вида {работник: зарплата}
     return salary_dict
 
 
+def data_write(file, **salary):
+    '''Записывает данные о работниках и их зарплате в файл'''
+    with open(file, 'w') as file:
+        for human, money in salary.items():
+            file.write('{} - {}\n'.format(human.title(), str(money)))
+
+
+def clear_cash(file, tax):
+    '''Вычитает налог с зарплаты каждого работника'''
+    cash_dict = {}
+    with open(file) as file:
+        for line in file:
+            divide = line.strip().split(' - ')          # создаем списки работников и их з/п в виде [worker, raw_money]
+            worker, raw_money = divide[0], float(divide[1])
+            get_money = raw_money - raw_money * tax     # вычитаем налог
+            cash_dict[worker] = get_money               # записываем конечные данные во временный словарь
+    return cash_dict
+
+
+def printing_worker_info_filtered(cut=500000, **kwargs):
+    '''Выводим построчно зарплату работников, если она меньше значения cut'''
+    for key, value in kwargs.items():
+        if float(value) < cut:
+            print('{} получает зарплату в размере {}'.format(key, value))
+
+
+# начисляем зарплаты работникам
 salaries = salary(people, money)
 
+# записываем данные о зарплатах и работниках в файл salary2.txt
+data_write('salary2.txt', **salaries)
 
-with open('salary2.txt', 'w') as file:
-    for name, cash in salaries.items():
-        file.write(name + ' - ' + str(cash) + '\n')
-raw_data = []
+# вычитаем 13% налог из зарплат работников
+cash_money = clear_cash('salary2.txt', tax)
 
-
-with open('salary2.txt') as file:
-    for line in file:
-        divide = (line.strip()).split(' - ')
-        print(divide)
-        print(divide[0].title() + ' получает зарплату в размере ' + str(int(divide[1])-int(divide[1])*tax) + ' рублей.')
+# Выводим информацию о зарплатах работников "на руки"
+printing_worker_info_filtered(**cash_money)
