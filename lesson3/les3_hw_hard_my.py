@@ -10,8 +10,8 @@
 # функция должна получить параметр damage атакующего и отнять это количество
 # health от атакуемого. Функция должна сама работать с словарями и изменять их значения.
 
-hero = {'name': None, 'health': 100, 'damage': 45}
-enemy = {'name': None, 'health': 200, 'damage': 15}
+hero = {'name': None, 'health': 100, 'damage': 25}
+enemy = {'name': None, 'health': 200, 'damage': 43}
 
 def give_name(person, name=None):
     '''Даем имена героям игры и записываем их в словари'''
@@ -43,22 +43,20 @@ def attack(player1, player2):
 
 def battle(attack1,attack2):
     if len(attack1) > len(attack2):
-##        delta = len(attack1) - len(attack2)
-##        attack1 = attack1[:-delta]
-        print(len(attack1))
         i = 0
-        while i < len(attack2):
-            print(attack1[i])
+        hits = len(attack2)
+        while i < hits:
             print(attack2[i])
-            i += 1
+            if i < hits - 1:
+                print(attack1[i])
+            i += 1        
     else:
-##        delta = len(attack2) - len(attack1)
-##        attack2 = attack2[:-delta]
-        print(len(attack2))
         i = 0
-        while i < len(attack1):
+        hits = len(attack1)
+        while i < hits:
             print(attack1[i])
-            print(attack2[i])
+            if i < hits - 1:
+                print(attack2[i])
             i += 1
         
     
@@ -67,9 +65,6 @@ give_name(enemy)
 
 hero_attack = attack(hero,enemy)
 enemy_attack = attack(enemy,hero)
-
-print(len(hero_attack))
-print(len(enemy_attack))
 
 battle(hero_attack, enemy_attack)
 
