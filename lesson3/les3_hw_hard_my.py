@@ -26,14 +26,16 @@ def save_params(**person):
     with open(filename, 'w', encoding="utf-8") as file:
         for key, value in person.items():
             file.write('{} - {}\n'.format(key, value))
-            
+           
+           
 def read_params(**person):
+    '''Чтение параметров персонажей и запись их данных в словари'''
     param_dict = {}
     filename = person['name'] + '.txt'
     with open(filename, 'r', encoding = 'utf-8') as file:
         for line in file:
-            tmp = line.split(' - ')
-            param_dict[tmp[0]] = tmp[1]
+            k, v = line.strip().split(' - ')
+            param_dict[k] = v
     return param_dict
     
     
@@ -47,10 +49,10 @@ def attack(player1, player2):
     fight = []                # создаем словарь, в который будем писать атаки персонажа 
     name1 = player1['name']
     name2 = player2['name']
-    damage = damage_get(player1['damage'],player2['armor'])
-    health = player2['health']
-    health1 = player1['health']
-    armor = player1['armor']
+    damage = damage_get(int(player1['damage']),float(player2['armor']))
+    health = int(player2['health'])
+    health1 = int(player1['health'])
+    armor = float(player1['armor'])
     print('{} has {} xp and {} armor'.format(name1, health1, armor)) 
     while health > 0:
         health = round((health - damage),1)      # пока здоровье одного из героев не упадет до нуля 
@@ -93,13 +95,9 @@ give_name(enemy)
 save_params(**hero)
 save_params(**enemy)
 
-
-print(read_params(**hero))
-print(read_params(**enemy))
-
 # записываем все их атаки друг против друга и сохраняем их в 2х списках
-hero_attack = attack(hero,enemy)
-enemy_attack = attack(enemy,hero)
+hero_attack = attack(read_params(**hero),read_params(**enemy))
+enemy_attack = attack(read_params(**enemy),read_params(**hero))
 
 # устраиваем битву поочередно выводя в консоль сообщения об атаках, до тех пор
 # пока не объявится победитель битвы
