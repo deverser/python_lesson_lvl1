@@ -21,15 +21,15 @@ def give_name(person, name=None):
 
 
 def attack(player1, player2):
-    '''Битва персонажей'''
-    fight = []
+    '''Атаки персонажей'''
+    fight = []                # создаем словарь, в который будем писать атаки персонажа 
     name1 = player1['name']
     name2 = player2['name']
     damage = player1['damage']
     health = player2['health']
     while health > 0:
-        health -= damage
-        if health <=0:
+        health -= damage      # пока здоровье одного из героев не упадет до нуля 
+        if health <=0:        # записываем атаки и добавляем их в список fight
             health = 0
             msg = '{} attacks {} with {}. {}\'s xp is {}. {} wins the fight!'.format(
                     name1, name2, damage, name2, health, name1)
@@ -42,13 +42,14 @@ def attack(player1, player2):
     return fight
 
 def battle(attack1,attack2):
+    '''Битва персонажей'''
     if len(attack1) > len(attack2):
-        i = 0
-        hits = len(attack2)
+        i = 0               # объявляем переменную i для счетчика атак персонажа
+        hits = len(attack2) # количество атак более мощного персонажа
         while i < hits:
-            print(attack2[i])
-            if i < hits - 1:
-                print(attack1[i])
+            print(attack2[i]) # выводим сообщения об атаках мощного персонажа
+            if i < hits - 1:  # так как 2й персонаж слабее, он сделает на один удар меньше чем 1й,
+                print(attack1[i]) # поэтому все последующие сообщения на экран не выводятся
             i += 1        
     else:
         i = 0
@@ -59,13 +60,16 @@ def battle(attack1,attack2):
                 print(attack2[i])
             i += 1
         
-    
+# даем имена героям игры    
 give_name(hero)
 give_name(enemy)
 
+# записываем все их атаки друг против друга и сохраняем их в 2х списках
 hero_attack = attack(hero,enemy)
 enemy_attack = attack(enemy,hero)
 
+# устраиваем битву поочередно выводя в консоль сообщения об атаках, до тех пор
+# пока не объявится победитель битвы
 battle(hero_attack, enemy_attack)
 
 
