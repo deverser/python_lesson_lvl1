@@ -10,8 +10,8 @@
 # функция должна получить параметр damage атакующего и отнять это количество
 # health от атакуемого. Функция должна сама работать с словарями и изменять их значения.
 
-hero = {'name': None, 'health': 100, 'damage': 25}
-enemy = {'name': None, 'health': 200, 'damage': 43}
+hero = {'name': None, 'health': 100, 'damage': 50, 'armor':1.2}
+enemy = {'name': None, 'health': 250, 'damage': 32, 'armor':1.5}
 
 def give_name(person, name=None):
     '''Даем имена героям игры и записываем их в словари'''
@@ -20,15 +20,40 @@ def give_name(person, name=None):
     return person
 
 
+def save_params(**person):
+    '''Сохранение параметров персонажей в файлы'''
+    filename = person['name'] + '.txt'
+    with open(filename, 'w', encoding="utf-8") as file:
+        for key, value in person.items():
+            file.write('{} - {}\n'.format(key, value))
+            
+def read_params(**person):
+    param_dict = {}
+    filename = person['name'] + '.txt'
+    with open(filename, 'r', encoding = 'utf-8') as file:
+        for line in file:
+            tmp = line.split(' - ')
+            param_dict[tmp[0]] = tmp[1]
+    return param_dict
+    
+    
+def damage_get(damage, armor=1.2):
+    '''Вычисление полученного урона с учётом брони'''
+    dmg_get = round(damage/armor, 1)
+    return dmg_get
+
 def attack(player1, player2):
     '''Атаки персонажей'''
     fight = []                # создаем словарь, в который будем писать атаки персонажа 
     name1 = player1['name']
     name2 = player2['name']
-    damage = player1['damage']
+    damage = damage_get(player1['damage'],player2['armor'])
     health = player2['health']
+    health1 = player1['health']
+    armor = player1['armor']
+    print('{} has {} xp and {} armor'.format(name1, health1, armor)) 
     while health > 0:
-        health -= damage      # пока здоровье одного из героев не упадет до нуля 
+        health = round((health - damage),1)      # пока здоровье одного из героев не упадет до нуля 
         if health <=0:        # записываем атаки и добавляем их в список fight
             health = 0
             msg = '{} attacks {} with {}. {}\'s xp is {}. {} wins the fight!'.format(
@@ -64,6 +89,14 @@ def battle(attack1,attack2):
 give_name(hero)
 give_name(enemy)
 
+# сохраняем параметры героев в файлы
+save_params(**hero)
+save_params(**enemy)
+
+
+print(read_params(**hero))
+print(read_params(**enemy))
+
 # записываем все их атаки друг против друга и сохраняем их в 2х списках
 hero_attack = attack(hero,enemy)
 enemy_attack = attack(enemy,hero)
@@ -71,8 +104,6 @@ enemy_attack = attack(enemy,hero)
 # устраиваем битву поочередно выводя в консоль сообщения об атаках, до тех пор
 # пока не объявится победитель битвы
 battle(hero_attack, enemy_attack)
-
-
 
 # Задание - 2
 # Давайте усложним предыдущее задание, измените сущности, добавив новый параметр - armor = 1.2
